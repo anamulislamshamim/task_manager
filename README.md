@@ -1,6 +1,10 @@
+***a simple SaaS task management application ***
+Any number of user can use this app independently 
+
+***Features***
 user can register<br>
 user can perform Add, Delete, Get and Edit operations <br>
-you can see only their tasks what they created <br>
+user can see only their tasks what they created <br>
 Without registration and authentication you can not see anything <br>
 user can search with any word<br>
 you can filter by priority <br>
