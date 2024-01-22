@@ -1,0 +1,59 @@
+{% extends "core/base.html" %}
+{% block title %}Task Manager{% endblock title %}
+{% block content %}
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="text-3xl mb-[100px] text-center">Tasks</h2>
+
+
+        <div class="grid grid-cols-4 gap-6">
+            <div class="col-span-1 me-[40px]">
+                <form method= 'get' action="{% url 'core:index' %}">
+                    <input placeholder="Enter your search word!" class="w-full py-4 px-6 border rounded-xl" name="query" value="{{ query }}" type="text">
+    
+                    <button class="w-full rounded-md hover:bg-teal-700 bg-teal-400 text-white px-3 py-2 mt-5">Search</button>
+                </form>
+                <hr class="my-6">
+                <h1 class="font-bold mb-3">Filter by Priority</h1>
+                <ul>
+                    {% for priority in priorities %}
+                        <li class="py-1 px-2 rounded">
+                            <a class="font-semibold" href="{% url 'core:index' %}?query={{ query }}&priority={{ priority.id }}">{{ priority.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+    
+                <hr class="my-6">
+                <h1 class="font-bold mb-3">Clear Filter</h1>
+                <ul>
+                    <li class="py-1 px-2 rounded bg-yellow-400 inline-block">
+                        <a class="text-white font-semibold" href="{% url 'core:index' %}">CLEAR</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-span-3">
+                <div class="grid grid-cols-4 gap-3 mb-[50px]">
+                    {% for task in tasks %}
+                        <div class="shadow-sm" style="width: 300px; height: 400px;">
+                            <a href="{% url 'tasks:detail' task.id %}">
+                                <div class="px-2 pt-[20px] bg-white">
+                                    
+                                    <img src="{{ task.image.url }}" alt="{{ task.title }} image loading" class="rounded-t-xl" style="height:180px; width: 100%;">
+                                </div>
+        
+                                <div class="p-6 bg-white rounded-b-xl">
+                                    <h2 class="text-2xl mb-3">{{ task.title }}</h2>
+                                    <div class="flex justify-between items-center">
+                                        <p>Author: {{ task.created_by.username }}</p>
+                                        <P>Priority: {{ task.priority }}</P>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}

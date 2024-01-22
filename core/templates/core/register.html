@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+    <div class="w-2/5 my-6 mx-auto bg-gray-100 rounded-xl p-6">
+        <h1 class="mb-6 text-3xl text-center">Registration Form</h1>
+
+        <form method="POST" novalidate> {% csrf_token %}
+            {% comment %} {{ form.as_p }} {% endcomment %}
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Username</label><br>
+                {{ form.username }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Email</label><br>
+                {{ form.email }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Password</label><br>
+                {{ form.password1 }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Confirm Password</label><br>
+                {{ form.password2 }}
+            </div>
+
+            {% if form.errors or form.non_field_errors %}
+                <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                    {% for fiel in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <button class="py-2 px-8 text-lg mt-6 bg-teal-500 rounded text-white font-semibold hover:bg-teal-600">SUBMIT</button>
+        </form>
+    </div>
+{% endblock content %}
